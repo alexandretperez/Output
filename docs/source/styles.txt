@@ -1,0 +1,26 @@
+.. role:: feature
+.. role:: underline
+
+.. |yes| raw:: html
+
+   <i class="fa fa-check">
+
+.. |no| raw:: html
+
+   <i class="fa fa-ban">
+
+.. |output| raw:: html
+
+    <a class="tooltips" href="#">TOutput
+        <span>The destination type</span>
+    </a>
+
+.. |input| raw:: html
+
+    <a class="tooltips" href="#">TInput
+        <span>The source type</span>
+    </a>
+
+.. |github| raw:: html
+
+    <a href="https://github.com/alexandretperez/Output" target="_blank">GitHub</a>

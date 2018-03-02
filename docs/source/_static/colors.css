@@ -1,0 +1,71 @@
+.feature {
+    color: teal;
+}
+
+.light {
+    color: grey;
+}
+
+.underline {
+    border-bottom: 1px solid #ddd;
+    display: inline-block;
+}
+
+a.tooltips {
+    position: relative;
+    display: inline-block;
+    color: #E74C3C;
+    background: #fff;
+    font-size: 80%;
+    padding: 0 5px;
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    border-bottom: 1px dotted #E74C3C;
+}
+
+a.tooltips span {
+    position: absolute;
+    width: 180px;
+    color: #222222;
+    background: #EEEEEE;
+    border: 1px solid #cccccc;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    visibility: hidden;
+    border-radius: 25px;
+}
+
+a.tooltips span:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #CCCCCC;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+
+a.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #EEEEEE;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+}
+
+a:hover.tooltips span {
+    visibility: visible;
+    opacity: 1;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -90px;
+    z-index: 999;
+}
