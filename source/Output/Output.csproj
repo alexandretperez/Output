@@ -4,6 +4,17 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Output.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Alexandre Toledo Perez</Authors>
+    <Company>Alexandre Toledo Perez</Company>
+    <Description>A .NET object-object mapper.</Description>
+    <Copyright>Copyright (c) 2018 Alexandre Toledo Perez</Copyright>
+    <PackageProjectUrl>https://github.com/alexandretperez/Output</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alexandretperez/Output</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://github.com/alexandretperez/Output/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>C# .NET Mapper Mapping</PackageTags>
+    <PackageIconUrl></PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
