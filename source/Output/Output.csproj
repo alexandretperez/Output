@@ -15,6 +15,7 @@
     <PackageLicenseUrl>https://github.com/alexandretperez/Output/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>C# .NET Mapper Mapping</PackageTags>
     <PackageIconUrl></PackageIconUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
