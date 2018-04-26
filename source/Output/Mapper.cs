@@ -53,19 +53,22 @@ namespace Output
                 return default(TOutput);
 
             var hash = TypePair.CalculateHash(input.GetType(), typeof(TOutput));
-            if (!_methodCache.ContainsKey(hash))
+            lock (locker)
             {
-                var mapFn = GetMapInternal(input.GetType(), typeof(TOutput));
-                var inputParam = Expression.Parameter(typeof(object));
-                var body = Expression.Lambda(Expression.Call(
-                    Expression.Constant(this),
-                    mapFn,
-                    Expression.Convert(inputParam, input.GetType()),
-                    Expression.Default(typeof(TOutput)),
-                    Expression.Constant(null, typeof(Dictionary<object, object>))
-                ), inputParam);
+                if (!_methodCache.ContainsKey(hash))
+                {
+                    var mapFn = GetMapInternal(input.GetType(), typeof(TOutput));
+                    var inputParam = Expression.Parameter(typeof(object));
+                    var body = Expression.Lambda(Expression.Call(
+                        Expression.Constant(this),
+                        mapFn,
+                        Expression.Convert(inputParam, input.GetType()),
+                        Expression.Default(typeof(TOutput)),
+                        Expression.Constant(null, typeof(Dictionary<object, object>))
+                    ), inputParam);
 
-                _methodCache.Add(hash, body.Compile());
+                    _methodCache.Add(hash, body.Compile());
+                }
             }
 
             var map = (Func<object, TOutput>)_methodCache[hash];
@@ -79,10 +82,13 @@ namespace Output
         {
             MapJob map = null;
             var hash = TypePair.CalculateHash(typeof(TInput), typeof(TOutput));
-            if (!_compiledCache.ContainsKey(hash))
+            lock (locker)
             {
-                map = new MapJob(typeof(TInput), typeof(TOutput));
-                CreateMapFunction(hash, map);
+                if (!_compiledCache.ContainsKey(hash))
+                {
+                    map = new MapJob(typeof(TInput), typeof(TOutput));
+                    CreateMapFunction(hash, map);
+                }
             }
 
             var fn = (Func<TInput, TOutput, Dictionary<object, object>, TOutput>)_compiledCache[hash];
@@ -93,15 +99,12 @@ namespace Output
 
         private void CreateMapFunction(int hash, MapJob job)
         {
-            lock (locker)
-            {
-                if (_compiledCache.ContainsKey(hash))
-                    return;
+            if (_compiledCache.ContainsKey(hash))
+                return;
 
-                var fn = _provider.CreateMapFunction(job);
-                if (fn != null)
-                    _compiledCache.Add(hash, fn.Compile());
-            }
+            var fn = _provider.CreateMapFunction(job);
+            if (fn != null)
+                _compiledCache.Add(hash, fn.Compile());
         }
 
         private void CreateProjectionCall(int hash, MapJob job, Expression queryExpression)
