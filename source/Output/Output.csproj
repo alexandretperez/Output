@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
@@ -15,7 +15,8 @@
     <PackageLicenseUrl>https://github.com/alexandretperez/Output/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>C# .NET Mapper Mapping</PackageTags>
     <PackageIconUrl></PackageIconUrl>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -78,6 +78,9 @@ namespace Output.Resolvers
                 {
                     var name = prefix + parameter.Name;
 
+                    if (parameter.ParameterType.IsPointer)
+                        continue;
+
                     var resolution = _provider.CurrentJob.GetResolutions().FirstOrDefault(p => p.Key.Member.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
                     if (resolution.Key != null)
                     {
