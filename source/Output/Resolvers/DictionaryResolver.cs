@@ -10,7 +10,7 @@ namespace Output.Resolvers
 {
     public class DictionaryResolver : IResolver
     {
-        private IMappingProvider _provider;
+        private readonly IMappingProvider _provider;
 
         public DictionaryResolver(IMappingProvider provider)
         {
@@ -22,7 +22,6 @@ namespace Output.Resolvers
             if (!input.Type.IsDictionary() || !output.Type.IsDictionary())
                 return null;
 
-            var inputArgs = input.Type.GetArguments();
             var outputArgs = output.Type.GetArguments();
 
             var inputParam = Expression.Parameter(input.Type, "inputParam");

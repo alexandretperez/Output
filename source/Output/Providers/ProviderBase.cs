@@ -48,8 +48,11 @@ namespace Output.Providers
             if (!Tracking.ContainsKey(input))
                 Tracking.Add(input, false);
 
-            foreach (var prop in input.GetRuntimeProperties().Where(p => p.PropertyType.IsClass() && !p.PropertyType.IsCommonType()).ToList())
+            foreach (var prop in input.GetRuntimeProperties())
             {
+                if (!prop.PropertyType.IsClass() || prop.PropertyType.IsCommonType())
+                    continue;
+
                 foreach (var p in Utils.ExtractTypes(prop.PropertyType))
                 {
                     if (Tracking.ContainsKey(p))
@@ -74,7 +77,6 @@ namespace Output.Providers
             Tracking.Clear();
         }
 
-        
         public IMappingProvider AddConfig(IMappingConfiguration config)
         {
             EnsureNoMapper();

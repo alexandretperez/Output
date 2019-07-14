@@ -64,7 +64,7 @@ namespace Output.Extensions
             && type != typeof(IntPtr)
             && type != typeof(UIntPtr)
             && type != typeof(double)
-            && type != typeof(Single);
+            && type != typeof(float);
 
         public static bool IsQueryable(this Type type) => typeof(IQueryable).IsAssignableFrom(type);
 

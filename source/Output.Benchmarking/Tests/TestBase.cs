@@ -12,7 +12,7 @@ namespace Output.Benchmarking.Tests
             Mapster = new MapsterMapper<TSource, TTarget>(GetName());
             Handwritten = new HandwrittenMapper<TSource, TTarget>(GetName());
             AutoMapper = new AutoMapMapper<TSource, TTarget>(GetName());
-        
+
             _source = InitializeSource();
         }
 
@@ -28,7 +28,7 @@ namespace Output.Benchmarking.Tests
         protected abstract string GetName();
 
         [Benchmark(Baseline = true)] // remove the Baseline = true to run all tests at once.
-        //[Benchmark] 
+        //[Benchmark]
         public TTarget HandwrittenMap()
         {
             return Handwritten.Map(_source);

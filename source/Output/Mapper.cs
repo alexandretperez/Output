@@ -50,7 +50,7 @@ namespace Output
         public TOutput Map<TOutput>(object input, TOutput output)
         {
             if (input == null)
-                return default(TOutput);
+                return default;
 
             var hash = TypePair.CalculateHash(input.GetType(), typeof(TOutput));
             lock (locker)

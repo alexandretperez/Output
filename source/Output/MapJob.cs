@@ -3,7 +3,6 @@ using Output.Resolvers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -37,11 +36,18 @@ namespace Output
             {
                 foreach (var parameter in ctor.Key.GetParameters())
                 {
-                    var key = _resolution.Keys.FirstOrDefault(p =>
-                        p.Member.Name.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase)
-                        && p.Type == parameter.ParameterType
-                        && ctor.Key.DeclaringType == p.Member.DeclaringType
-                    );
+                    MemberExpression key = null;
+                    foreach (var r in _resolution.Keys)
+                    {
+                        if (r.Member.Name.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase)
+                            && r.Type == parameter.ParameterType
+                            && ctor.Key.DeclaringType == r.Member.DeclaringType)
+                        {
+                            key = r;
+                            break;
+                        }
+                    }
+
                     if (key != null)
                         _resolution.Remove(key);
                 }
@@ -74,14 +80,10 @@ namespace Output
         {
             foreach (var item in _resolution)
             {
-                if (parameter == null)
-                {
-                    yield return Expression.Bind(item.Key.Member, item.Value);
-                }
-                else
-                {
-                    yield return Expression.Bind(item.Key.Member, new ParameterReplacerVisitor(parameter).Visit(item.Value));
-                }
+                yield return Expression.Bind(item.Key.Member,
+                    parameter == null
+                        ? item.Value
+                        : new ParameterReplacerVisitor(parameter).Visit(item.Value));
             }
         }
 

@@ -21,14 +21,11 @@ namespace Output.Resolvers
         {
             _provider = provider;
         }
-        
+
         public Expression Resolve(Expression input, Expression output)
         {
             if (!input.Type.IsEnumerable() || !output.Type.IsEnumerable() || input.Type.IsDictionary() || output.Type.IsDictionary())
                 return null;
-
-            var inputArgs = input.Type.GetArguments();
-            var outputArgs = output.Type.GetArguments();
 
             _inputArg = input.Type.GetArguments()[0];
             _outputArg = output.Type.GetArguments()[0];
@@ -115,7 +112,6 @@ namespace Output.Resolvers
                 loopBreak
             );
 
-            var genericType = typeof(IEnumerable<>).MakeGenericType(_outputArg);
             var newExpr = Expression.New(result.Type);
 
             _skipCoalesce = true;

@@ -1,5 +1,4 @@
 ﻿using Output.Extensions;
-using Output.Internals;
 using Output.Visitors;
 using System.Linq.Expressions;
 using System.Reflection;

@@ -53,7 +53,6 @@ namespace Output.Benchmarking
                     RunBenchmarkDotNet(false);
                     break;
 
-
                 case ConsoleKey.NumPad3:
                 case ConsoleKey.D3:
                     RunBenchmarkDotNet(true);
@@ -114,7 +113,6 @@ namespace Output.Benchmarking
                 typeof(CustomTest),
                 typeof(FlatteningTest)
             });
-
 
             if (allTests)
             {

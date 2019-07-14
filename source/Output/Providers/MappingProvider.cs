@@ -23,8 +23,7 @@ namespace Output.Providers
             CurrentJob = job;
             DetermineTracking(job.Input);
 
-            LambdaExpression plan = null;
-
+            LambdaExpression plan;
             if (job.Input.IsEnumerable() && job.Output.IsEnumerable())
             {
                 plan = CollectionMap();
@@ -64,15 +63,13 @@ namespace Output.Providers
 
             var input = CurrentJob.InputParameter;
             var output = CurrentJob.OutputParameter;
-
-            var returnLabel = Expression.Label(CurrentJob.Output, "_return");
+            _ = Expression.Label(CurrentJob.Output, "_return");
 
             var nullCheck = Expression.NotEqual(input, Expression.Constant(null, input.Type));
             var ctorResolver = GetConstructorResolver();
             var ctor = CurrentJob.GetConstructor(ctorResolver);
             var newInstance = Expression.Assign(output, Expression.Coalesce(output, ctor));
-            Expression body = null;
-
+            Expression body;
             if (Tracking.ContainsKey(CurrentJob.Input) && Tracking[CurrentJob.Input])
             {
                 body = GetCacheBlock(newInstance, nullCheck);
@@ -131,14 +128,17 @@ namespace Output.Providers
             foreach (var prop in unresolvedMembers)
                 UnFlatten(prop);
         }
-        
+
         private void DetermineAssignments()
         {
             var config = Configurations.FirstOrDefault(p => p.Job == CurrentJob);
             var unresolvedMembers = new List<MemberExpression>();
             var nullPropagVisitor = new DefaultValuePropagationVisitor();
-            foreach (var prop in CurrentJob.Output.GetRuntimeProperties().Where(p => p.IsPublic()).ToArray())
+
+            foreach (var prop in CurrentJob.Output.GetRuntimeProperties())
             {
+                if (!prop.IsPublic()) continue;
+
                 var name = prop.Name;
                 var outputMember = Expression.Property(CurrentJob.OutputParameter, name);
 
@@ -235,8 +235,10 @@ namespace Output.Providers
 
         private void ProcessUnflattenProperties(MemberExpression member, string memberFullName, MemberInfo[] processedMembers)
         {
-            foreach (var prop in member.Type.GetRuntimeProperties().Where(p => p.IsPublic()))
+            foreach (var prop in member.Type.GetRuntimeProperties())
             {
+                if (!prop.IsPublic()) continue;
+
                 if (processedMembers.Contains(prop))
                 {
                     if (prop.PropertyType.IsClass() && prop.PropertyType != typeof(string))
@@ -245,8 +247,7 @@ namespace Output.Providers
                     continue;
                 }
 
-                var outputMember = GetMember(member, prop.Name) as MemberExpression;
-                if (outputMember == null)
+                if (!(GetMember(member, prop.Name) is MemberExpression outputMember))
                     continue;
 
                 var inputMember = GetMember(CurrentJob.InputParameter, memberFullName + prop.Name);

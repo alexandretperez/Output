@@ -33,7 +33,7 @@ namespace Output.Benchmarking.Mappers
         {
             var config = new TypeAdapterConfig();
             config.NewConfig<Employee, EmployeeDto>()
-             .ConstructUsing(p => new EmployeeDto(true))
+             .ConstructUsing(_ => new EmployeeDto(true))
              .Map(p => p.FullName, p => $"{p.Name} {p.Surname}")
              .Map(p => p.IsSociable, p => p.Skills.Contains("Sociable"))
              .Map(p => p.Contact, p => $"Address: {p.Address}, Phone: {p.Phone}")

@@ -16,7 +16,7 @@ namespace Output.Benchmarking.Tests
             //Add(RPlotExporter.Default);
             Add(Job.ShortRun);
 
-            Set(new DefaultOrderProvider(SummaryOrderPolicy.FastestToSlowest));
+            Set(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest));
         }
     }
 }

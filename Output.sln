@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29006.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Output", "source\Output\Output.csproj", "{60725324-471E-49CF-94A4-A081953A3659}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Output.Benchmarking", "source\Output.Benchmarking\Output.Benchmarking.csproj", "{A3E2884C-EB59-4395-AE95-1D2D526AAC8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Output.ProjectionTests", "source\Output.ProjectionTests\Output.ProjectionTests.csproj", "{6BFA2ABA-E737-4CD3-AD80-C71D45E1913D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Output.Extensions.Microsoft.DependencyInjection", "source\Output.Extensions.Microsoft.DependencyInjection\Output.Extensions.Microsoft.DependencyInjection.csproj", "{2FC00D44-84E4-40E7-BED5-DF517BABBB73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6BFA2ABA-E737-4CD3-AD80-C71D45E1913D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BFA2ABA-E737-4CD3-AD80-C71D45E1913D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BFA2ABA-E737-4CD3-AD80-C71D45E1913D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC00D44-84E4-40E7-BED5-DF517BABBB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC00D44-84E4-40E7-BED5-DF517BABBB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC00D44-84E4-40E7-BED5-DF517BABBB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC00D44-84E4-40E7-BED5-DF517BABBB73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -21,7 +21,7 @@ namespace Output.Resolvers
             {
                 return Expression.Convert(input, output.Type); // by cast
             }
-            catch { };
+            catch { }
 
             var converter = typeof(Convert).GetRuntimeMethod($"To{output.Type.Name}", new[] { input.Type });
             if (converter == null)
