@@ -180,7 +180,7 @@ The code above is able to map an :underline:`Email` to a :underline:`string`. Bu
 
     public class EmailResolver : IResolver
     {
-        public bool Resolve(Expression input, Expression output)
+        public Expression Resolve(Expression input, Expression output)
         {
             if (input.Type == typeof(Email) && output.Type == typeof(string))
             {
